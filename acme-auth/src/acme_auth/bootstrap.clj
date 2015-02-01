@@ -7,25 +7,25 @@
   (jdbc/with-db-connection [conn ds]
     (jdbc/db-do-commands conn
                          "create table user (
-                           id int identity primary key,
+                           id integer auto_increment primary key,
                            username varchar(255) not null,
                            password varchar(255) not null)"
 
                          "create table application (
-                           id int primary key,
+                           id integer auto_increment primary key,
                            name varchar(255) not null)"
 
                          "create table role (
-                           id int identity primary key,
-                           application_id int not null,
+                           id integer auto_increment primary key,
+                           application_id integer not null,
                            name varchar(255) not null,
 
                            foreign key (application_id) references application (id))"
 
                          "create table user_role (
-                           id int identity primary key,
-                           role_id int not null,
-                           user_id int not null,
+                           id integer auto_increment primary key,
+                           role_id integer not null,
+                           user_id integer not null,
 
                            foreign key (role_id) references role (id),
                            foreign key (user_id) references user (id))")))
@@ -54,4 +54,5 @@
                          :password "secret"
                          :user-roles [{:role-id 11}]})
 
-  (println (service/find-user ds "test")))
+  ;;(println (service/find-user ds "admin"))
+  )

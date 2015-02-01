@@ -8,9 +8,8 @@
   (jdbc/with-db-transaction [conn ds]
     (let [res (jdbc/insert! conn
                             :user
-                            [:username :password]
-                            [(:username user) (:password user)])
-          user-id (first res)]
+                            {:username (:username user) :password (:password user)})
+          user-id ((keyword "scope_identity()") (first res))]
       (doseq [ur (:user-roles user)]
         (jdbc/insert! conn
                       :user_role
