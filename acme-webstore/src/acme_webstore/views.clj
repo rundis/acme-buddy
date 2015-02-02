@@ -69,7 +69,6 @@
    [:div {:class "col-sm-9 col-lg-10"} [:p {} "Login to acme store to get all the benefits..."]]
    [:div {:class "col-sm-3 col-lg-2"}
     [:form {:role "form" :method "POST"}
-     [:h3 "Login"]
      [:div {:class "form-group"} (input {:field "username" :label "Username"})]
      [:div {:class "form-group"} (input {:field "password" :label "Password" :type "password"})]
      [:div {:class "form-group"} [:button {:type "submit" :class "btn btn-default"} "Login"]]]]])
