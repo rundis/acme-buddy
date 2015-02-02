@@ -30,7 +30,7 @@
 (defn do-login [req]
   (let [resp (create-token req)]
     (condp = (:status resp)
-      201 (-> (response/redirect (if-let [m (get-in req [:query-params "m"])] m "/dashboard"))
+      201 (-> (response/redirect (get-in req [:query-params "m"] "/dashboard"))
               (assoc :session {:token (-> resp :body :token)}))
       401 (show-login req ["Invalid username or password"])
       {:status 500 :body "Something went pearshape when trying to authenticate"})))
@@ -79,11 +79,8 @@
   (fn [req]
     (let [resp (handler req)
           loc (get-in resp [:headers "Location"])]
-      (if loc
-        (if (some #(re-matches % loc) redirect-whitelist)
-          resp
-          (do
+      (if (and loc (not (some #(re-matches % loc) redirect-whitelist)))
+        (do
             ;; (log/warning "Possible redirect attack: " loc)
-            (assoc-in resp [:headers "Location"] "/")))
+            (assoc-in resp [:headers "Location"] "/"))
         resp))))
-
