@@ -20,7 +20,9 @@
 
 (defroutes app-routes
   (ANY "/" [] (fn [req] (println req) "Index of acme auth"))
-  (POST "/create-auth-token" [] handlers/create-auth-token))
+  (POST "/create-auth-token" [] handlers/create-auth-token)
+  (POST "/refresh-auth-token" [] handlers/refresh-auth-token)
+  (POST "/invalidate-refresh-token" [] handlers/invalidate-refresh-token))
 
 
 (defn wrap-datasource [handler]
@@ -30,8 +32,8 @@
 (defn wrap-config [handler]
   (fn [req]
     (handler (assoc req :auth-conf {:privkey "auth_privkey.pem"
+                                    :pubkey "auth_pubkey.pem"
                                     :passphrase "secret-key"}))))
-
 
 (def app
   (-> app-routes

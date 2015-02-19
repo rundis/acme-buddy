@@ -28,7 +28,17 @@
                            user_id integer not null,
 
                            foreign key (role_id) references role (id),
-                           foreign key (user_id) references user (id))")))
+                           foreign key (user_id) references user (id))"
+
+                         "create table refresh_token (
+                           id integer auto_increment primary key,
+                           user_id integer not null,
+                           valid boolean default true not null,
+                           issued long not null,
+                           token varchar2(512) not null,
+
+                           foreign key (user_id) references user (id),
+                           unique (user_id, issued))")))
 
 
 (defn seed [ds]
