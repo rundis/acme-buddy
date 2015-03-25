@@ -47,22 +47,25 @@
                   [:id :name]
                   [10 "acme-webstore"]
                   [20 "acme-crm"]
-                  [30 "acme-admin"])
+                  [30 "acme-admin"]
+                  [40 "acme-catalog"])
     (jdbc/insert! conn :role
                   [:id :application_id :name]
                   [10 10 "customer"]
                   [11 10 "store-admin"]
                   [20 20 "customer-support"]
                   [21 20 "accounting"]
-                  [30 30 "sysadmin"]))
+                  [30 30 "sysadmin"]
+                  [40 40 "catalog-admin"]
+                  [41 40 "customer"]))
 
   ;; add a couple of users for testing/demo
   (service/add-user! ds {:username "test"
                          :password "secret"
-                         :user-roles [{:role-id 10}]})
+                         :user-roles [{:role-id 10} {:role-id 41}]})
   (service/add-user! ds {:username "admin"
                          :password "secret"
-                         :user-roles [{:role-id 11}]})
+                         :user-roles [{:role-id 11} {:role-id 40}]})
 
   ;;(println (service/find-user ds "admin"))
   )

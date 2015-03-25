@@ -1,6 +1,7 @@
 (ns acme-webstore.web
   (:require [acme-webstore.security :as sec]
             [acme-webstore.views :as views]
+            [acme-webstore.catalog :as catalog]
             [compojure.core :refer [defroutes GET POST]]
             [compojure.route :as route]
             [ring.middleware.params :refer [wrap-params]]
@@ -20,6 +21,10 @@
 (defn show-accounts [req]
   (views/layout {:request req :title "Account listing" :content (views/accounts req)}))
 
+(defn show-products [req]
+  (views/layout {:request req :title "Products" :content (catalog/get-products req)}))
+
+
 (defroutes public-routes
   (route/resources "/")
   (GET "/" []       show-index)
@@ -31,6 +36,7 @@
 (defroutes secured-routes
   (GET "/accounts/:id" [] show-account)
   (GET "/accounts" []     (sec/wrap-restrict-by-roles show-accounts [:store-admin]))
+  (GET "/products" []     show-products)
   (GET "/dashboard" []    show-dashboard))
 
 

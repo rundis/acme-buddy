@@ -14,7 +14,8 @@
       [:ul.nav.navbar-nav
        [:li [:a {:href (if user "/dashboard" "/")} "Home"]]
        (when user
-         [:li [:a {:href (str "/accounts/" (:id user))} "My account"]])
+         (list [:li [:a {:href (str "/accounts/" (:id user))} "My account"]]
+               [:li [:a {:href "/products"} "Products"]]))
        (when (any-granted? req [:store-admin])
          [:li [:a {:href "/accounts"} "Account listing"]])]
       [:ul.nav.navbar-nav.navbar-right
