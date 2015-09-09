@@ -13,6 +13,10 @@ This sample service application provides rest services for handlng user authenti
 
 The app will by default start on port 6001
 
+You will also need to:
+* Start the [acme-webstore](../acme-webstore/) app
+* Start the [acme-catalog](../acme-catalog/) app
+
 
 ## Tech specs
 * Uses a h2 in memory database for users/roles/accessrights

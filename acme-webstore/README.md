@@ -1,6 +1,6 @@
-# Acme Auth
+# Acme Webstore
 
-This sample service application provides rest services for handlng user authentication.
+This sample app will talk to the authentication and catalogue applications - acting as a front end for the user.
 
 
 ## Preconditions
@@ -11,12 +11,12 @@ This sample service application provides rest services for handlng user authenti
 
 ``` lein ring server```
 
-The app will by default start on port 6002
+The app will by default start on port 6002, and your browser shoud open to http://localhost:6002
 
 
 You will also need to:
 * Start the [acme-auth](../acme-auth/) app
-
+* Start the [acme-catalog](../acme-catalog/) app
 
 
 
